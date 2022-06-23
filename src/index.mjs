@@ -10,7 +10,7 @@ import sessionFileStore from "session-file-store";
 
 const app = express();
 const fileStore = sessionFileStore(session);
-app.set("view engine", "ejs");
+app.set("view engine", "pug");
 app.use(morgan("combined"));
 
 app.use(
@@ -25,11 +25,11 @@ auth.init(app);
 
 app.get("/", auth.ensure_auth, async function (req, res) {
   try {
-    let grade = await getGrade(req.user.id);
-    console.log(grade);
+    let grades = await getGrade(req.user.id);
     res.render("grade", {
       title: "CSC061",
       id: req.user.id,
+      grades,
     });
   } catch (e) {
     res.send("500 Server error", 500);
