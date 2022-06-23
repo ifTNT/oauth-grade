@@ -1,0 +1,20 @@
+version: "3"
+services:
+  scoreboard:
+    build:
+      context: .
+      # args:
+      #  NODE_ENV: production
+    restart: always
+    # environment:
+    ports:
+      - 3000:3000
+    volumes:
+      - session:/workspace/sessions
+      - scoreboard:/workspace/data
+
+volumes:
+  session:
+    driver: local
+  scoreboard:
+    driver: local
