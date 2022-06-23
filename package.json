@@ -12,6 +12,7 @@
   "author": "Yung-Hsiang Hu",
   "license": "ISC",
   "dependencies": {
+    "csv-parse": "^5.2.0",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-session": "^1.17.3",

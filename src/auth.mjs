@@ -34,6 +34,7 @@ function auth_user(access_token, refresh_token, profile, done) {
   return done(null, {
     provider: profile.provider,
     email: profile.email,
+    id: profile.email.split("@")[0].toUpperCase(),
     sub: profile.sub,
     access_token,
     refresh_token,

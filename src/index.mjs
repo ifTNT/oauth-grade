@@ -5,25 +5,35 @@ import session from "express-session";
 import morgan from "morgan";
 import cred from "./credential.js";
 import auth from "./auth.mjs";
+import { getGrade } from "./grade.mjs";
 import sessionFileStore from "session-file-store";
 
 const app = express();
-const FileStore = sessionFileStore(session);
+const fileStore = sessionFileStore(session);
 app.set("view engine", "ejs");
 app.use(morgan("combined"));
 
 app.use(
   session({
     resave: false,
-    store: new FileStore({}),
+    store: new fileStore({}),
     saveUninitialized: true,
     secret: cred.SESSION_SECRET,
   })
 );
 auth.init(app);
 
-app.get("/", auth.ensure_auth, function (req, res) {
-  res.json(req.user);
+app.get("/", auth.ensure_auth, async function (req, res) {
+  try {
+    let grade = await getGrade(req.user.id);
+    console.log(grade);
+    res.render("grade", {
+      title: "CSC061",
+      id: req.user.id,
+    });
+  } catch (e) {
+    res.send("500 Server error", 500);
+  }
 });
 
 app.use("/auth", auth.router);
