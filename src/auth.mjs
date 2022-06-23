@@ -30,7 +30,6 @@ router.get("/logout", function (req, res, next) {
 });
 
 function auth_user(access_token, refresh_token, profile, done) {
-  console.log(profile);
   return done(null, {
     provider: profile.provider,
     email: profile.email,

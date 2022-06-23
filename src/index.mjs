@@ -12,7 +12,6 @@ const app = express();
 const fileStore = sessionFileStore(session);
 app.set("view engine", "pug");
 app.use(morgan("combined"));
-
 app.use(
   session({
     resave: false,
@@ -23,16 +22,21 @@ app.use(
 );
 auth.init(app);
 
+/*
+ * Setup the routes
+ */
 app.get("/", auth.ensure_auth, async function (req, res) {
   try {
     let grades = await getGrade(req.user.id);
-    res.render("grade", {
+    let view_params = {
       title: "CSC061",
       id: req.user.id,
       grades,
-    });
+    };
+    res.render(grades.length === 0 ? "notfound" : "grade", view_params);
   } catch (e) {
-    res.send("500 Server error", 500);
+    console.log(e);
+    res.status(500).send("500 Server error");
   }
 });
 
