@@ -1,4 +1,5 @@
 node_modules
 credential.js
+config.js
 sessions
 grade.csv

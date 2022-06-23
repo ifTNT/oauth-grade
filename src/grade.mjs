@@ -2,9 +2,10 @@
 
 import fs from "fs";
 import { parse } from "csv-parse";
+import config from "./config.js";
 
 export function getGrade(id) {
-  const grade_path = "./data/grade.csv";
+  const { grade_path } = config;
   return new Promise((resolve, reject) => {
     let lines = 0;
     let title = [];

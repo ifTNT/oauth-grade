@@ -4,6 +4,8 @@ import express from "express";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import cred from "./credential.js";
+import config from "./config.js";
+
 const router = express.Router();
 
 router.get("/google", passport.authenticate("google", { scope: ["email"] }));
@@ -46,7 +48,7 @@ function init(app) {
       {
         clientID: cred.GOOGLE_CLIENT_ID,
         clientSecret: cred.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://csc061.csie.nuk.edu.tw/auth/google/callback",
+        callbackURL: config.google_callback_url,
       },
       auth_user
     )

@@ -5,10 +5,13 @@ import session from "express-session";
 import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
-import cred from "./credential.js";
 import auth from "./auth.mjs";
 import { getGrade } from "./grade.mjs";
 import sessionFileStore from "session-file-store";
+
+// Configuration
+import cred from "./credential.js";
+import config from "./config.js";
 
 const app = express();
 const fileStore = sessionFileStore(session);
@@ -36,7 +39,7 @@ app.get("/", auth.ensure_auth, async function (req, res) {
   try {
     let grades = await getGrade(req.user.id);
     let view_params = {
-      title: "CSC061",
+      title: config.title,
       id: req.user.id,
       grades,
     };
