@@ -3,18 +3,17 @@ services:
   scoreboard:
     build:
       context: .
-      # args:
-      #  NODE_ENV: production
+      args:
+        NODE_ENV: production
     restart: always
-    # environment:
     ports:
       - 3000:3000
     volumes:
       - session:/workspace/sessions
-      - scoreboard:/workspace/data
+      - grade:/workspace/data
 
 volumes:
   session:
     driver: local
-  scoreboard:
+  grade:
     driver: local

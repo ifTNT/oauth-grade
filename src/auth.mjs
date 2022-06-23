@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get("/error", function (req, res) {
-  res.send("Error");
+  res.status(500).send("Error");
 });
 
 router.get("/logout", function (req, res, next) {
@@ -46,7 +46,7 @@ function init(app) {
       {
         clientID: cred.GOOGLE_CLIENT_ID,
         clientSecret: cred.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/callback",
+        callbackURL: "https://csc061.csie.nuk.edu.tw/auth/google/callback",
       },
       auth_user
     )
