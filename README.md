@@ -2,7 +2,7 @@
 
 Announce private personal grading that can be accessed through a Google account
 
-![screenshot](https://i.imgur.com/25Yw8pF.png)
+![screenshot](https://i.imgur.com/XjFdW8C.png)
 
 ## Usage
 
